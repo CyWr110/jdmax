@@ -82,7 +82,7 @@ $.innerKeyWords = [
 ];
 //下面很重要，遇到问题请把下面注释看一遍再来问
 let args_xh = {
-  h5st_server: process.env.H5ST_SERVER || 'https://jd.zhx47.top',
+  h5st_server: process.env.H5ST_SERVER || '',
   /*
    * 控制一次最多跑几个号，默认10个
    */
@@ -199,7 +199,11 @@ let args_xh = {
 
 !(async () => {
   await $.wait(500);
-  $.log('\n遇到问题请先看脚本内注释；解决不了可联系https://t.me/zhouya47\n');
+  $.log('\n遇到问题请先看脚本内注释\n');
+  if(!args_xh.h5st_server) {
+    console.log('请先在环境变量中配置H5ST接口变量：export H5ST_SERVER="你的接口"');
+    return;
+  }
   await requireConfig();
   if (!$.cookiesArr[0]) {
     console.log($.name, '【提示】请先获取京东账号一cookie\n直接使用NobyDa的京东签到获取', 'https://bean.m.jd.com/');
